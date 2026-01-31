@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 /*
 This is the skeleton code for the BOB chatbot
 
@@ -14,6 +15,12 @@ public class Bob {
                 + "| |_) | |_|  |_) |\n"
                 + "|____/ \\___/ |____/ \n";
 
+        /* Create a storage arraylist */
+        ArrayList<String> tasks = new ArrayList<>();
+
+        /* Keep track of the number of items in the list */
+        int listCounter = 0;
+
         /* Creates a scanner to read input from user */
         Scanner scan = new Scanner(System.in);
         /* Greeting message */
@@ -26,16 +33,28 @@ public class Bob {
             /* Gets input from user */
             String input = scan.nextLine();
 
+            /*Check if bye is typed regardless of Capslock and exit */
             if (input.toLowerCase().equals("bye")) {
                 System.out.println("------------------------------------\n"
                         + "Bye. See you soon!\n\n"
                         + "\n------------------------------------");
                 status = false;
             }
-            /* Else, echo the user input */
+
+            /* Prints list of task if user asks for it */
+            else if(input.toLowerCase().equals("list")){
+                System.out.println("------------------------------------");
+                for (int i = 0; i < listCounter; i ++) {
+                    System.out.println((i + 1) + ". " + tasks.get(i));
+                }
+                System.out.println("------------------------------------");
+            }
+            /* Else, increment the listCounter, add the task to the list & echo the user input */
             else {
+                listCounter ++;
+                tasks.add(input);
                 System.out.println("------------------------------------\n"
-                        + input
+                        + "added: " + input
                         + "\n------------------------------------\n");
             }
         }
