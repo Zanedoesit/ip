@@ -15,11 +15,8 @@ public class Bob {
                 + "| |_) | |_|  |_) |\n"
                 + "|____/ \\___/ |____/ \n";
 
-        /* Create a storage arraylist */
-        ArrayList<String> tasks = new ArrayList<>();
-
-        /* Keep track of the number of items in the list */
-        int listCounter = 0;
+        /* Create a task arraylist to store objects */
+        ArrayList<Task> tasks = new ArrayList<>();
 
         /* Creates a scanner to read input from user */
         Scanner scan = new Scanner(System.in);
@@ -44,17 +41,37 @@ public class Bob {
             /* Prints list of task if user asks for it */
             else if(input.toLowerCase().equals("list")){
                 System.out.println("------------------------------------");
-                for (int i = 0; i < listCounter; i ++) {
+                for (int i = 0; i < tasks.size(); i ++) {
                     System.out.println((i + 1) + ". " + tasks.get(i));
                 }
                 System.out.println("------------------------------------");
             }
-            /* Else, increment the listCounter, add the task to the list & echo the user input */
-            else {
-                listCounter ++;
-                tasks.add(input);
+
+            /* Check if user types in mark and gets the number of the marked task */
+            else if (input.toLowerCase().startsWith("mark ")) {
+                int taskNumber = Integer.parseInt(input.substring(5)) - 1;
+                tasks.get(taskNumber).markAsDone();
                 System.out.println("------------------------------------\n"
-                        + "added: " + input
+                        + "Nice! I've marked this task as done:\n"
+                        + tasks.get(taskNumber)
+                        + "\n------------------------------------\n");
+            }
+
+            /* Else unmark and gets number of unmakred task */
+            else if(input.toLowerCase().startsWith("unmark ")) {
+                int taskNumber = Integer.parseInt(input.substring(7)) - 1;
+                tasks.get(taskNumber).markAsNotDone();
+                System.out.println("------------------------------------\n"
+                        + "Ok, I've marked this task as done:\n"
+                        + tasks.get(taskNumber)
+                        + "\n------------------------------------\n");
+            }
+
+            /* Else, add the task and print out what was added */
+            else {
+                tasks.add(new Task(input));
+                System.out.println("------------------------------------\n"
+                        + "added: " + tasks.get(tasks.size()-1).toString()
                         + "\n------------------------------------\n");
             }
         }
