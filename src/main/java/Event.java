@@ -10,7 +10,7 @@ public class Event extends Task {
         this.end = end;
     }
 
-    /* Return string representation and add "E" */
+    /* Return string representation and add [E] */
     @Override
     public String toString() {
         return "[E]" + getStatusIcon() + " " + description + " (from: " + start + " to: " + end + ")";

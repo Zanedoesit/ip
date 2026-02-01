@@ -137,7 +137,7 @@ public class Bob {
                             }
                             }
                         }
-                else if (input.toLowerCase().startsWith("event ")) {
+            else if (input.toLowerCase().startsWith("event ")) {
                     String[] parts = input.substring(6).split(" /from | /to ");
                     if (parts.length != 3) {
                         System.out.println("------------------------------------\n"
@@ -163,12 +163,23 @@ public class Bob {
                         }
                     }
             }
+            /* Check for delete */
+            else if (input.toLowerCase().startsWith("delete ")) {
+                int taskNumber = Integer.parseInt(input.substring(7)) - 1;
+                Task deletedTask = tasks.get(taskNumber);
+                tasks.remove(taskNumber);
+                System.out.println("------------------------------------\n"
+                        + "Alright. I've removed this task: \n"
+                        + deletedTask + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list. \n"
+                        + "------------------------------------\n");
+            }
             /* Else, add the task and print out what was added */
             else {
-                tasks.add(new Task(input));
-                System.out.println("------------------------------------\n"
-                        + "added: " + tasks.get(tasks.size()-1).toString()
-                        + "\n------------------------------------\n");
+                    tasks.add(new Task(input));
+                    System.out.println("------------------------------------\n"
+                            + "added: " + tasks.get(tasks.size()-1).toString()
+                            + "\n------------------------------------\n");
             }
         }
     }
