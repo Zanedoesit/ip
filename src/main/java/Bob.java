@@ -62,9 +62,46 @@ public class Bob {
                 int taskNumber = Integer.parseInt(input.substring(7)) - 1;
                 tasks.get(taskNumber).markAsNotDone();
                 System.out.println("------------------------------------\n"
-                        + "Ok, I've marked this task as done:\n"
+                        + "Ok, I've marked this task as not done yet:\n"
                         + tasks.get(taskNumber)
                         + "\n------------------------------------\n");
+            }
+
+            else if (input.toLowerCase().startsWith("todo ")) {
+                String taskDescription = input.substring(5);
+                tasks.add(new ToDo(taskDescription));
+                System.out.println("------------------------------------\n"
+                        + "Got it. I've added this task:\n"
+                        + tasks.get(tasks.size()-1).toString() + "\n"
+                        + "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.\n"
+                        + "------------------------------------\n");
+
+            } else if (input.toLowerCase().startsWith("deadline ")) {
+                String[] parts = input.substring(9).split(" /by ");
+                        if (parts.length == 2){
+                            String taskDescription = parts[0];
+                            String date = parts[1];
+                            tasks.add(new Deadline(taskDescription, date));
+                            System.out.println("------------------------------------\n"
+                                + "Got it. I've added this task:\n"
+                                +  tasks.get(tasks.size()-1).toString() + "\n"
+                                + "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.\n"
+                                + "------------------------------------\n");
+                        }
+            } else if (input.toLowerCase().startsWith("event ")) {
+                String[] parts = input.substring(6).split(" /from | /to ");
+                if (parts.length == 3){
+                    String taskDescription = parts[0];
+                    String start = parts[1];
+                    String end = parts[2];
+                    tasks.add(new Event (taskDescription, start , end));
+                    System.out.println("------------------------------------\n"
+                            + "Got it. I've added this task:\n"
+                            + tasks.get(tasks.size()-1).toString() + "\n"
+                            + "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.\n"
+                            + "------------------------------------\n");
+                }
+
             }
 
             /* Else, add the task and print out what was added */

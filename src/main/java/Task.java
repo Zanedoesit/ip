@@ -29,6 +29,10 @@ public class Task {
         }
     }
 
+    public String getDescription(){
+        return description;
+    }
+
     /* return the Icon plus task */
     @Override
     public String toString(){
