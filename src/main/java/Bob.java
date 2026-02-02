@@ -9,11 +9,11 @@ public class Bob {
     public static void main(String[] args) {
         /* Status for loop to be used to keep the chat alive */
         boolean status = true;
-        String logo = " ____   ___   ____ \n"
+        String logo = " ____   ___   ____\n"
                 + "|  ) / _ \\ |  )\n"
                 + "|  _ \\| | |   _ \\\n"
                 + "| |_) | |_|  |_) |\n"
-                + "|____/ \\___/ |____/ \n";
+                + "|____/ \\___/ |____/\n";
 
         /* Create a task arraylist to store objects */
         ArrayList<Task> tasks = new ArrayList<>();
