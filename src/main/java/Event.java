@@ -1,26 +1,32 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /* Event class */
 public class Event extends Task {
-    protected String start;
-    protected String end;
+    protected LocalDate start;
+    protected LocalDate end;
 
     /* Constructor that calls description and initialises start and end */
-    public Event(String description, String start, String end) {
+    public Event(String description, String startString, String endString) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.start = LocalDate.parse(startString);
+        this.end = LocalDate.parse(endString);
     }
 
     /* Return string representation and add [E] */
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + " " + description + " (from: " + start + " to: " + end + ")";
+        /* add format date */
+        String formattedStart = start.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String formattedEnd = end.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return "[E]" + getStatusIcon() + " " + description + " (from: " + formattedStart + " to: " + formattedEnd + ")";
     }
 
-    public String getStart(){
+    public LocalDate getStart(){
         return start;
     }
 
-    public String getEnd(){
+    public LocalDate getEnd(){
         return end;
     }
 

@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /* Storage class code that handles saving and loading tasks */
 public class Storage {
@@ -66,9 +68,13 @@ public class Storage {
         boolean isDone = line.contains("[X]");
         int byIndex = line.indexOf(" (by: ");
         String description = line.substring(7, byIndex);
-        String date = line.substring(byIndex + 6, line.length() - 1);
+        String dateString = line.substring(byIndex + 6, line.length() - 1);
 
-        Task task = new Deadline(description, date);
+        /* convert display format
+        back to yyyy-mm-dd using helper method */
+        LocalDate date = convertToLocalDate(dateString);
+
+        Task task = new Deadline(description, date.toString());
         if (isDone){
             task.markAsDone();
         }
@@ -81,10 +87,15 @@ public class Storage {
         int fromIndex = line.indexOf(" (from: ");
         String description = line.substring(7, fromIndex);
         int toIndex = line.indexOf(" to: ");
-        String start = line.substring(fromIndex + 8, toIndex);
-        String end = line.substring(toIndex + 5, line.length() - 1);
+        String startString = line.substring(fromIndex + 8, toIndex);
+        String endString = line.substring(toIndex + 5, line.length() - 1);
 
-        Task task = new Event(description, start, end);
+        /* Convert display format back
+        to yyyy-mm-dd with helper method*/
+        LocalDate startDate = convertToLocalDate(startString);
+        LocalDate endDate = convertToLocalDate(endString);
+
+        Task task = new Event(description, startDate.toString(), endDate.toString());
         if (isDone){
             task.markAsDone();
         }
@@ -101,6 +112,18 @@ public class Storage {
             writer.close();
         } catch (IOException e){
             System.out.println("Error saving: " + e.getMessage());
+        }
+    }
+
+    /* Helper method to covert date from
+    display format to LocalDate */
+    private LocalDate convertToLocalDate(String dateString){
+        try { /* parse using DateTimeFormatter */
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            return LocalDate.parse(dateString, formatter);
+        }
+        catch (Exception e){
+            return LocalDate.parse(dateString);
         }
     }
 }
