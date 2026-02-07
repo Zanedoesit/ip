@@ -126,10 +126,11 @@ public class Bob {
 
             } else if (input.toLowerCase().startsWith("deadline ")) {
                 String[] parts = input.substring(9).split(" /by ");
+                /* Changed Error format message */
                 if (parts.length != 2){
                     System.out.println("------------------------------------\n"
                             + "Error! Deadline format is wrong.\n"
-                            + "Try: deadline <your task> by <date> \n"
+                            + "Try: deadline <your task> by yyyy-mm-dd \n"
                             + "------------------------------------\n");
                 }
                 else{ /* Check if task description and deadline is filled */
@@ -141,23 +142,30 @@ public class Bob {
                                 + "Please fill it up"
                                 + "------------------------------------\n");
                     }
-                    else{ /* if all is good add Deadline */
-                        tasks.add(new Deadline(taskDescription, date));
-                        storage.save(tasks);
-                        System.out.println("------------------------------------\n"
-                                + "Got it. I've added this task:\n"
-                                + tasks.get(tasks.size() - 1).toString() + "\n"
-                                + "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.\n"
-                                + "------------------------------------\n");
+                    else{ /* Add try catch block with error handling */
+                        try{
+                            tasks.add(new Deadline(taskDescription, date));
+                            storage.save(tasks);
+                            System.out.println("------------------------------------\n"
+                                    + "Got it. I've added this task:\n"
+                                    + tasks.get(tasks.size() - 1).toString() + "\n"
+                                    + "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.\n"
+                                    + "------------------------------------\n");
+                        } catch (Exception e){
+                            System.out.println("------------------------------------\n"
+                                    + "Error! Please use the date format yyyy-mm-dd (e.g. 2019-10-15)\n"
+                                    + "------------------------------------\n");
+                        }
                     }
                 }
             }
             else if (input.toLowerCase().startsWith("event ")) {
                 String[] parts = input.substring(6).split(" /from | /to ");
                 if (parts.length != 3) {
+                    /* Change date format for error message */
                     System.out.println("------------------------------------\n"
                             + "Error! Event format is wrong. \n"
-                            + "Try: event <your task> /from <start> /to <end> \n"
+                            + "Try: event <your task> /from yyyy-mm-dd /to yyyy-mm-dd \n"
                             + "------------------------------------\n");
                 } else{ /* check for task description and start/end date */
                     String taskDescription = parts[0].trim();
@@ -168,14 +176,21 @@ public class Bob {
                                 + "Error! Task description or start or end date should not be empty. \n"
                                 + "------------------------------------\n");
                     }
-                    else {
-                        tasks.add(new Event(taskDescription, start, end));
-                        storage.save(tasks);
-                        System.out.println("------------------------------------\n"
-                                + "Got it. I've added this task:\n"
-                                + tasks.get(tasks.size() - 1).toString() + "\n"
-                                + "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.\n"
-                                + "------------------------------------\n");
+                    else { /* Add try and catch for format */
+                        try {
+                            tasks.add(new Event(taskDescription, start, end));
+                            storage.save(tasks);
+                            System.out.println("------------------------------------\n"
+                                    + "Got it. I've added this task:\n"
+                                    + tasks.get(tasks.size() - 1).toString() + "\n"
+                                    + "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.\n"
+                                    + "------------------------------------\n");
+                        } catch (Exception e) {
+                            System.out.println("------------------------------------\n"
+                                    + "Error! Event format is wrong. \n"
+                                    + "Please use date format yyyy-mm-dd (e.g. 2019-10-15)\n"
+                                    + "------------------------------------\n");
+                        }
                     }
                 }
             }
