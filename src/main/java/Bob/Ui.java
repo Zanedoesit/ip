@@ -1,6 +1,8 @@
+package Bob;
+
 import java.util.Scanner;
 import java.util.ArrayList;
-/* Ui class to handle interaction with user */
+/* Bob.Ui class to handle interaction with user */
 public class Ui {
     private Scanner scanner;
 

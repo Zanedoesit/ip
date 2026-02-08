@@ -1,4 +1,6 @@
-/* This is the code for the Task class */
+package Bob;
+
+/* This is the code for the Bob.Task class */
 public class Task {
     protected String description;
     protected boolean isDone;

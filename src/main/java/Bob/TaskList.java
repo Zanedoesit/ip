@@ -1,6 +1,8 @@
+package Bob;
+
 import java.util.ArrayList;
 
-/* TaskList class */
+/* Bob.TaskList class */
 public class TaskList {
     private ArrayList<Task> tasks;
 

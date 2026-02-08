@@ -1,6 +1,8 @@
-/* ToDo class */
+package Bob;
+
+/* Bob.ToDo class */
 public class ToDo extends Task {
-    /* Call constructor from Task */
+    /* Call constructor from Bob.Task */
     public ToDo(String description){
         super(description);
     }

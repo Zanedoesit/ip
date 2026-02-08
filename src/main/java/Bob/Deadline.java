@@ -1,12 +1,14 @@
+package Bob;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-/* Deadline class */
+/* Bob.Deadline class */
 public class Deadline extends Task {
     protected LocalDate date;
 
-    /* Call description from Task but initialise date */
+    /* Call description from Bob.Task but initialise date */
     public Deadline (String description, String dateString) {
         super(description);
         /* Parse date */

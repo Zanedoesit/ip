@@ -1,4 +1,4 @@
-/* Parser class to par user input
+package Bob;/* Bob.Parser class to par user input
 and determines the command type */
 
 
@@ -44,7 +44,7 @@ public class Parser {
         try { /* replace original printing code with ui */
             int taskNumber = Integer.parseInt(input.substring(5)) - 1;
             if (taskNumber < 0 || taskNumber >= tasks.size()) {
-                ui.showError("Task number is out of range please try again.");
+                ui.showError("Bob.Task number is out of range please try again.");
             } else { /* mark task as done */
                 tasks.getTask(taskNumber).markAsDone();
                 storage.save(tasks.getTasks());
@@ -61,13 +61,13 @@ public class Parser {
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
             if (taskNumber < 0 || taskNumber >= tasks.size()) {
-                ui.showError("Task number is out of range please try again.");
+                ui.showError("Bob.Task number is out of range please try again.");
             } else { /* add unmarked task */
                 tasks.getTask(taskNumber).markAsNotDone();
                 storage.save(tasks.getTasks());
                 ui.showTaskUnmarked(tasks.getTask(taskNumber));
             }
-          /* Change print to Ui method */
+          /* Change print to Bob.Ui method */
         } catch (NumberFormatException e){
             ui.showError("Please enter a valid task number.");
         }
@@ -88,11 +88,11 @@ public class Parser {
     }
 
     /* handleDeadline helper with
-     updated Ui methods */
+     updated Bob.Ui methods */
     private static void handleDeadline(String input, TaskList tasks, Ui ui, Storage storage) {
         String[] parts = input.substring(9).split(" /by ");
         if (parts.length != 2) {
-            ui.showError("Deadline format is wrong.\n"
+            ui.showError("Bob.Deadline format is wrong.\n"
                     + "Try: deadline <task> /by yyyy-mm-dd");
         } else {
             String taskDescription = parts[0].trim();
@@ -100,7 +100,7 @@ public class Parser {
 
             /* Check for empty task or date */
             if (taskDescription.isEmpty() || dateString.isEmpty()) {
-                ui.showError("Task description or deadline is empty. Please fill it up.");
+                ui.showError("Bob.Task description or deadline is empty. Please fill it up.");
             } else {
                 try {/* parse to check format */
                     LocalDate.parse(dateString);
@@ -119,7 +119,7 @@ public class Parser {
     private static void handleEvent(String input, TaskList tasks, Ui ui, Storage storage){
         String[] parts = input.substring(6).split(" /from | /to ");
         if (parts.length != 3){
-            ui.showError("Event format is wrong.\n"
+            ui.showError("Bob.Event format is wrong.\n"
             + "Try: event <task> /from yyyy-mm-dd /to yyyy-mm-dd");
         }
         else {
@@ -128,7 +128,7 @@ public class Parser {
             String end = parts[2].trim();
 
             if(taskDescription.isEmpty() || start.isEmpty() || end.isEmpty()){
-                ui.showError("Task description or start or end time should not be empty.");
+                ui.showError("Bob.Task description or start or end time should not be empty.");
             }
             else{
                 try {
@@ -152,7 +152,7 @@ public class Parser {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
             /* Check if tasknumber out of range */
             if (taskNumber < 0 || taskNumber >= tasks.size()){
-                ui.showError("Task number is out of range please try again.");
+                ui.showError("Bob.Task number is out of range please try again.");
             }
             else {
                 Task deletedTask = tasks.deleteTask(taskNumber);

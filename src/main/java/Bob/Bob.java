@@ -1,7 +1,7 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+package Bob;
+
 /*
-This is the Main class for the Bob chatbot
+This is the Main class for the Bob.Bob chatbot
 
  */
 

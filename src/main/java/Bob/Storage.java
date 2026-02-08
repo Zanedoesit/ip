@@ -1,3 +1,5 @@
+package Bob;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/* Storage class code that handles saving and loading tasks */
+/* Bob.Storage class code that handles saving and loading tasks */
 public class Storage {
     private String filePath;
 

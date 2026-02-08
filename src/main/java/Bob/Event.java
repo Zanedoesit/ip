@@ -1,7 +1,9 @@
+package Bob;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/* Event class */
+/* Bob.Event class */
 public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
