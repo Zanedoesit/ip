@@ -10,7 +10,7 @@ public class Ui {
     }
 
     /* Welcome message */
-    public void showWelcomeMessage(){
+    public void showWelcome(){
         String logo = " ____   ___   ____\n"
                 + "|  ) / _ \\ |  )\n"
                 + "|  _ \\| | |   _ \\\n"
@@ -69,7 +69,7 @@ public class Ui {
                 + "------------------------------------\n");
     }
 
-    public void showTaskMarkedAsDone(Task task) {
+    public void showTaskMarked(Task task) {
         System.out.println("------------------------------------\n"
                 + "Nice! I've marked this task as done:\n"
                 + task + "\n"
