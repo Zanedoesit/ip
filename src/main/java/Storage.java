@@ -54,7 +54,7 @@ public class Storage {
     private void loadToDo(ArrayList<Task> tasks, String line) {
         /* Check if task is done */
         boolean isDone = line.contains("[X]");
-        String description = line.substring(7);
+        String description = line.substring(6);
 
         Task task = new ToDo(description);
         if (isDone){
@@ -67,7 +67,7 @@ public class Storage {
     private void loadDeadline(ArrayList<Task> tasks, String line){
         boolean isDone = line.contains("[X]");
         int byIndex = line.indexOf(" (by: ");
-        String description = line.substring(7, byIndex);
+        String description = line.substring(6, byIndex);
         String dateString = line.substring(byIndex + 6, line.length() - 1);
 
         /* convert display format
@@ -85,7 +85,7 @@ public class Storage {
     private void loadEvent(ArrayList<Task> tasks, String line){
         boolean isDone = line.contains("[X]");
         int fromIndex = line.indexOf(" (from: ");
-        String description = line.substring(7, fromIndex);
+        String description = line.substring(6, fromIndex);
         int toIndex = line.indexOf(" to: ");
         String startString = line.substring(fromIndex + 8, toIndex);
         String endString = line.substring(toIndex + 5, line.length() - 1);
