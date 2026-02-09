@@ -32,10 +32,12 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "Bob"
+    archiveBaseName = "Bob.jar"
     archiveClassifier = null
 }
 
 run{
     standardInput = System.in
 }
+
+
