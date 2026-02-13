@@ -1,27 +1,38 @@
 package Bob;
 
-/* This is the code for the Bob.Task class */
+/**
+ * Task class
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
-    /* Constructor */
+    /**
+     * Constructor class
+     * @param description the task description
+     */
     public Task (String description) {
         this.description = description;
         this.isDone = false;
     }
-    /* Mark task as done */
+    /**
+     * Mark task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
-    /* Mark task as not done */
+    /**
+     * Mark task as not done
+     */
     public void markAsNotDone(){
         this.isDone = false;
     }
 
-    /* Return status icon for task,
-    [X] if done, [] if not done
+    /**
+     * Return status icon for task
+     * @return the status icon
+     * [X] if done, [] if not done
      */
     public String getStatusIcon() {
         if (isDone){
@@ -31,13 +42,20 @@ public class Task {
         }
     }
 
-    public String getDescription(){
+    /**
+     * Get task description from user
+     * @return the task description
+     */
+    public String getDescription() {
         return description;
     }
 
-    /* return the Icon plus task */
+    /**
+     * Convert status to string
+     *  @return the icon plus task
+     */
     @Override
-    public String toString(){
+    public String toString() {
         return getStatusIcon() + " " + description;
     }
 }
