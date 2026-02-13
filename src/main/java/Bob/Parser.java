@@ -1,13 +1,22 @@
-package Bob;/* Bob.Parser class to par user input
-and determines the command type */
+package Bob;
 
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+/**
+ * Parser class
+ * Handles parsing for Bob
+ */
 public class Parser {
 
-    /* parse with helper methods */
+    /**
+     * parse with helper methods
+     * @param input the input from the user
+     * @param tasks the task list to perform the operations on
+     * @param ui the user interface for display messages
+     * @param storage the storage manager for saving tasks
+     */
     public static void parse(String input, TaskList tasks, Ui ui, Storage storage){
         if (input.toLowerCase().equals("list")){
             ui.showTaskList(tasks.getTasks());
@@ -39,41 +48,58 @@ public class Parser {
 
     }
 
-    /* handleMark helper method */
+    /**
+     * Handle the mark command and mark as done
+     * @param input the input string with task number
+     * @param tasks the task list
+     * @param ui the user interface
+     * @param storage the storage manager
+     */
     private static void handleMark(String input, TaskList tasks, Ui ui, Storage storage) {
-        try { /* replace original printing code with ui */
+        try {
             int taskNumber = Integer.parseInt(input.substring(5)) - 1;
             if (taskNumber < 0 || taskNumber >= tasks.size()) {
                 ui.showError("Bob.Task number is out of range please try again.");
-            } else { /* mark task as done */
-                tasks.getTask(taskNumber).markAsDone();
+            } else {
+                tasks.markTask(taskNumber);
                 storage.save(tasks.getTasks());
                 ui.showTaskMarked(tasks.getTask(taskNumber));
             }
         } catch (NumberFormatException e) {
-            /* replace print with ui method */
             ui.showError("Please enter a valid task number. ");
         }
     }
 
-    /* handleUnmark helper method */
+    /**
+     * Handles unmark command to mark as not done
+     * @param input the input string containing the task number
+     * @param tasks the task list
+     * @param ui the user interface
+     * @param storage the storage manager
+     */
     private static void handleUnmark(String input, TaskList tasks, Ui ui, Storage storage){
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
             if (taskNumber < 0 || taskNumber >= tasks.size()) {
                 ui.showError("Bob.Task number is out of range please try again.");
-            } else { /* add unmarked task */
-                tasks.getTask(taskNumber).markAsNotDone();
+            } else {
+                tasks.unmarkTask(taskNumber);
                 storage.save(tasks.getTasks());
                 ui.showTaskUnmarked(tasks.getTask(taskNumber));
             }
-          /* Change print to Bob.Ui method */
+
         } catch (NumberFormatException e){
             ui.showError("Please enter a valid task number.");
         }
     }
 
-    /* handleTodo helper method */
+    /**
+     *  Handles todo command
+     * @param input the input containing task
+     * @param tasks the task list
+     * @param ui the user interface
+     * @param storage storage manager
+     */
     private static void handleTodo(String input, TaskList tasks, Ui ui, Storage storage) {
         String taskDescription = input.substring(5).trim();
         if (taskDescription.isEmpty()){
@@ -87,8 +113,13 @@ public class Parser {
         }
     }
 
-    /* handleDeadline helper with
-     updated Bob.Ui methods */
+    /**
+     * Handles deadline command
+     * @param input the task input
+     * @param tasks the task list
+     * @param ui the user interface
+     * @param storage storage manager
+     */
     private static void handleDeadline(String input, TaskList tasks, Ui ui, Storage storage) {
         String[] parts = input.substring(9).split(" /by ");
         if (parts.length != 2) {
@@ -97,12 +128,13 @@ public class Parser {
         } else {
             String taskDescription = parts[0].trim();
             String dateString = parts[1].trim();
-
-            /* Check for empty task or date */
+            /**
+             * Check for empty task or date
+             */
             if (taskDescription.isEmpty() || dateString.isEmpty()) {
                 ui.showError("Bob.Task description or deadline is empty. Please fill it up.");
             } else {
-                try {/* parse to check format */
+                try {
                     LocalDate.parse(dateString);
 
                     Task task = new Deadline(taskDescription, dateString);
@@ -116,6 +148,14 @@ public class Parser {
         }
 
     }
+
+    /**
+     * Handles event command
+     * @param input the input task from user
+     * @param tasks the task list
+     * @param ui the user interface
+     * @param storage the storage manager
+     */
     private static void handleEvent(String input, TaskList tasks, Ui ui, Storage storage){
         String[] parts = input.substring(6).split(" /from | /to ");
         if (parts.length != 3){
@@ -146,11 +186,19 @@ public class Parser {
         }
     }
 
-    /* handleDelete helper method */
+    /**
+     * Handles delete command
+     * @param input the input number
+     * @param tasks the task list
+     * @param ui the user interface
+     * @param storage the storage manager
+     */
     private static void handleDelete(String input, TaskList tasks, Ui ui, Storage storage){
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
-            /* Check if tasknumber out of range */
+            /**
+             * Check if tasknumber out of range
+             */
             if (taskNumber < 0 || taskNumber >= tasks.size()){
                 ui.showError("Bob.Task number is out of range please try again.");
             }

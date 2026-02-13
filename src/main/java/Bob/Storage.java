@@ -9,19 +9,26 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/* Bob.Storage class code that handles saving and loading tasks */
+/**
+ * Bob storage class code that handles saving and loading tasks
+ */
 public class Storage {
     private String filePath;
 
-    /* Constructor for storage */
+    /**
+     * Constructor for storage
+     * @param filePath the name of the filepath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     public void load(ArrayList<Task> tasks){
         try {
-            /* Handle case where data folder and file doesn't exist
-            at the start by creating it */
+            /**
+             * Handle case where data folder and file doesn't exist
+             * at the start by creating it
+             * */
             File folder = new File("data");
             if (folder.exists() == false) {
                 folder.mkdir();
@@ -33,8 +40,10 @@ public class Storage {
                 return;
             }
 
-            /* Read the file using BufferedReader
-                and handle each case with helper methods */
+            /**
+             * Read the file using BufferedReader
+             * and handle each case with helper methods
+             */
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -52,9 +61,15 @@ public class Storage {
         }
     }
 
-    /* loadToDo helper method */
+    /**
+     * load to do command helper method
+     * @param tasks the task list
+     * @param line the whole line of text input
+     */
     private void loadToDo(ArrayList<Task> tasks, String line) {
-        /* Check if task is done */
+        /**
+         * Check if task is done
+         */
         boolean isDone = line.contains("[X]");
         String description = line.substring(6);
 
@@ -65,15 +80,21 @@ public class Storage {
         tasks.add(task);
     }
 
-    /* loadDeadline helper */
+    /**
+     * loaddeadline helper method
+     * @param tasks the task list
+     * @param line the whole line of text input
+     */
     private void loadDeadline(ArrayList<Task> tasks, String line){
         boolean isDone = line.contains("[X]");
         int byIndex = line.indexOf(" (by: ");
         String description = line.substring(6, byIndex);
         String dateString = line.substring(byIndex + 6, line.length() - 1);
 
-        /* convert display format
-        back to yyyy-mm-dd using helper method */
+        /**
+         * convert display format
+         * back to yyyy-mm-dd using helper method
+         */
         LocalDate date = convertToLocalDate(dateString);
 
         Task task = new Deadline(description, date.toString());
@@ -83,7 +104,11 @@ public class Storage {
         tasks.add(task);
     }
 
-    /* loadEvent helper*/
+    /**
+     * loadevent helper method
+     * @param tasks the task list
+     * @param line the whole line of input text
+     */
     private void loadEvent(ArrayList<Task> tasks, String line){
         boolean isDone = line.contains("[X]");
         int fromIndex = line.indexOf(" (from: ");
@@ -92,8 +117,10 @@ public class Storage {
         String startString = line.substring(fromIndex + 8, toIndex);
         String endString = line.substring(toIndex + 5, line.length() - 1);
 
-        /* Convert display format back
-        to yyyy-mm-dd with helper method*/
+        /**
+         * Convert display format back
+         * to yyyy-mm-dd with helper method
+         */
         LocalDate startDate = convertToLocalDate(startString);
         LocalDate endDate = convertToLocalDate(endString);
 
@@ -104,10 +131,20 @@ public class Storage {
         tasks.add(task);
     }
 
+    /**
+     * Save method to save tasks
+     * Saves current task list into the save file
+     * @param tasks the task list
+     */
     public void save(ArrayList<Task> tasks){
         try {
+            /**
+             * Create a filewriter linked to save file
+             */
             FileWriter writer = new FileWriter(filePath);
-
+            /**
+             * Write each task into file line by line
+             */
             for (int i = 0; i < tasks.size(); i ++){
                 writer.write(tasks.get(i).toString() + "\n");
             }
@@ -117,10 +154,13 @@ public class Storage {
         }
     }
 
-    /* Helper method to covert date from
-    display format to LocalDate */
+    /**
+     * Helper method to covert date from
+     * display format to LocalDate
+     * @param dateString the date in string
+     */
     private LocalDate convertToLocalDate(String dateString){
-        try { /* parse using DateTimeFormatter */
+        try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
             return LocalDate.parse(dateString, formatter);
         }

@@ -3,19 +3,30 @@ package Bob;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/* Bob.Event class */
+/**
+ * Bob Event class
+ * Represents a task with start and end date
+ */
 public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
 
-    /* Constructor that calls description and initialises start and end */
+    /**
+     * Constructor class for event
+     * @param description the task description
+     * @param startString the start date
+     * @param endString   the end date
+     */
     public Event(String description, String startString, String endString) {
         super(description);
         this.start = LocalDate.parse(startString);
         this.end = LocalDate.parse(endString);
     }
 
-    /* Return string representation and add [E] */
+    /**
+     * Convert date to string
+     * @return string representation and add [E]
+     */
     @Override
     public String toString() {
         /* add format date */
@@ -24,10 +35,17 @@ public class Event extends Task {
         return "[E]" + getStatusIcon() + " " + description + " (from: " + formattedStart + " to: " + formattedEnd + ")";
     }
 
+    /** Get the start date
+     * @return start date in LocalDate
+     */
     public LocalDate getStart(){
         return start;
     }
 
+    /**
+     * Get the end date
+     * @return end date in LocalDate
+     */
     public LocalDate getEnd(){
         return end;
     }
