@@ -3,6 +3,7 @@ package bob;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Parser class
@@ -39,7 +40,10 @@ public class Parser {
         } else if (input.toLowerCase().startsWith("delete ")) {
             handleDelete(input, tasks, ui, storage);
 
-        }else {
+        } else if (input.toLowerCase().startsWith("find ")) {
+            handleFind(input, tasks, ui);
+
+        } else {
             Task task = new Task(input);
             tasks.addTask(task);
             storage.save(tasks.getTasks());
@@ -208,6 +212,27 @@ public class Parser {
             }
         } catch (NumberFormatException e) {
             ui.showError("Please enter a valid task number.");
+        }
+    }
+
+    /**
+     * Handles the find command and display tasks that match
+     *
+     * @param input the full user input
+     * @param tasks the task list
+     * @param ui the user interface
+     */
+    private static void handleFind(String input, TaskList tasks, Ui ui) {
+        String keyword = input.substring(5).trim();
+        if (keyword.isEmpty()) {
+            ui.showError("Please provide a keyword.");
+        }
+        /* Use findtask helper method to check for matching keywords */
+        ArrayList<Task> matches = tasks.findTasks(keyword);
+        if (matches.isEmpty()) {
+            ui.showMessage("No matching tasks found.");
+        } else {
+            ui.showFindResults(matches);
         }
     }
 }

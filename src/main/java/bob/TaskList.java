@@ -73,4 +73,19 @@ public class TaskList {
         tasks.get(index).markAsNotDone();
     }
 
+    /**
+     * Find and returns tasks whose description matches keyword
+     * @param keyword the keyword to search for
+     * @return a list of matching tasks
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matches = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
+
 }
