@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,7 +35,7 @@ public class Deadline extends Task {
      * Get deadline date
      * @return the deadline date
      */
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return date;
     }
 }

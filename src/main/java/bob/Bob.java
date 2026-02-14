@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 /**
  * This is the Main class for the Bob chatbot
@@ -14,7 +14,7 @@ public class Bob {
      * Constructor class with specified file path for storage
      * @param filePath the file path where tasks will be stored
      */
-    public Bob(String filePath){
+    public Bob(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
@@ -25,14 +25,14 @@ public class Bob {
      * Run main method to keep the chatbot alive
      * Shows welcome message and continues to process until user exit
      */
-    public void run(){
+    public void run() {
         ui.showWelcome();
         boolean isRunning = true;
 
-        while (isRunning){
+        while (isRunning) {
             String input = ui.readCommand();
 
-            if (input.toLowerCase().equals("bye")){
+            if (input.toLowerCase().equals("bye")) {
                 ui.showGoodbye();
                 isRunning = false;
             }
@@ -45,7 +45,7 @@ public class Bob {
      *  Main method that runs the chatbot
      * @param args command line argument
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Bob("./data/bob.txt").run();
     }
 
