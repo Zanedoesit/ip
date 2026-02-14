@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,25 +25,17 @@ public class Storage {
 
     public void load(ArrayList<Task> tasks){
         try {
-            /**
-             * Handle case where data folder and file doesn't exist
-             * at the start by creating it
-             * */
+            /* Handle case where data folder and file doesn't exist */
             File folder = new File("data");
             if (folder.exists() == false) {
                 folder.mkdir();
             }
-
             File file = new File(filePath);
             if (file.exists() == false) {
                 file.createNewFile();
                 return;
             }
-
-            /**
-             * Read the file using BufferedReader
-             * and handle each case with helper methods
-             */
+            /* Read the file using BufferedReader and handle each case with helper methods */
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -67,9 +59,7 @@ public class Storage {
      * @param line the whole line of text input
      */
     private void loadToDo(ArrayList<Task> tasks, String line) {
-        /**
-         * Check if task is done
-         */
+        /* Check if task is done */
         boolean isDone = line.contains("[X]");
         String description = line.substring(6);
 
@@ -91,10 +81,7 @@ public class Storage {
         String description = line.substring(6, byIndex);
         String dateString = line.substring(byIndex + 6, line.length() - 1);
 
-        /**
-         * convert display format
-         * back to yyyy-mm-dd using helper method
-         */
+        /* Convert display format back to yyyy-mm-dd using helper method */
         LocalDate date = convertToLocalDate(dateString);
 
         Task task = new Deadline(description, date.toString());
@@ -109,7 +96,7 @@ public class Storage {
      * @param tasks the task list
      * @param line the whole line of input text
      */
-    private void loadEvent(ArrayList<Task> tasks, String line){
+    private void loadEvent(ArrayList<Task> tasks, String line) {
         boolean isDone = line.contains("[X]");
         int fromIndex = line.indexOf(" (from: ");
         String description = line.substring(6, fromIndex);
@@ -117,10 +104,7 @@ public class Storage {
         String startString = line.substring(fromIndex + 8, toIndex);
         String endString = line.substring(toIndex + 5, line.length() - 1);
 
-        /**
-         * Convert display format back
-         * to yyyy-mm-dd with helper method
-         */
+        /* Convert display format back to yyyy-mm-dd with helper method */
         LocalDate startDate = convertToLocalDate(startString);
         LocalDate endDate = convertToLocalDate(endString);
 
@@ -134,17 +118,13 @@ public class Storage {
     /**
      * Save method to save tasks
      * Saves current task list into the save file
-     * @param tasks the task list
+     * @param tasks the list of tasks to save
      */
-    public void save(ArrayList<Task> tasks){
+    public void save(ArrayList<Task> tasks) {
         try {
-            /**
-             * Create a filewriter linked to save file
-             */
+            /* Create a filewriter linked to save file */
             FileWriter writer = new FileWriter(filePath);
-            /**
-             * Write each task into file line by line
-             */
+            /* Write each task into file line by line */
             for (int i = 0; i < tasks.size(); i ++){
                 writer.write(tasks.get(i).toString() + "\n");
             }
@@ -159,7 +139,7 @@ public class Storage {
      * display format to LocalDate
      * @param dateString the date in string
      */
-    private LocalDate convertToLocalDate(String dateString){
+    private LocalDate convertToLocalDate(String dateString) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
             return LocalDate.parse(dateString, formatter);

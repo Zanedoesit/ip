@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 /**
  * Task class
@@ -25,7 +25,7 @@ public class Task {
     /**
      * Mark task as not done
      */
-    public void markAsNotDone(){
+    public void markAsNotDone() {
         this.isDone = false;
     }
 
@@ -35,7 +35,7 @@ public class Task {
      * [X] if done, [] if not done
      */
     public String getStatusIcon() {
-        if (isDone){
+        if (isDone) {
             return "[X]";
         }  else {
             return "[]";

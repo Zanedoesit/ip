@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 
 import java.time.DateTimeException;
@@ -17,7 +17,7 @@ public class Parser {
      * @param ui the user interface for display messages
      * @param storage the storage manager for saving tasks
      */
-    public static void parse(String input, TaskList tasks, Ui ui, Storage storage){
+    public static void parse(String input, TaskList tasks, Ui ui, Storage storage) {
         if (input.toLowerCase().equals("list")){
             ui.showTaskList(tasks.getTasks());
 
@@ -77,7 +77,7 @@ public class Parser {
      * @param ui the user interface
      * @param storage the storage manager
      */
-    private static void handleUnmark(String input, TaskList tasks, Ui ui, Storage storage){
+    private static void handleUnmark(String input, TaskList tasks, Ui ui, Storage storage) {
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
             if (taskNumber < 0 || taskNumber >= tasks.size()) {
@@ -88,7 +88,7 @@ public class Parser {
                 ui.showTaskUnmarked(tasks.getTask(taskNumber));
             }
 
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             ui.showError("Please enter a valid task number.");
         }
     }
@@ -128,15 +128,14 @@ public class Parser {
         } else {
             String taskDescription = parts[0].trim();
             String dateString = parts[1].trim();
-            /**
-             * Check for empty task or date
-             */
+            /* Check for empty task or date */
             if (taskDescription.isEmpty() || dateString.isEmpty()) {
                 ui.showError("Bob.Task description or deadline is empty. Please fill it up.");
             } else {
                 try {
+                    /* Convert date string to localdate object and validates format */
                     LocalDate.parse(dateString);
-
+                    /* If valid then create a new deadline task */
                     Task task = new Deadline(taskDescription, dateString);
                     tasks.addTask(task);
                     storage.save(tasks.getTasks());
@@ -156,7 +155,7 @@ public class Parser {
      * @param ui the user interface
      * @param storage the storage manager
      */
-    private static void handleEvent(String input, TaskList tasks, Ui ui, Storage storage){
+    private static void handleEvent(String input, TaskList tasks, Ui ui, Storage storage) {
         String[] parts = input.substring(6).split(" /from | /to ");
         if (parts.length != 3){
             ui.showError("Bob.Event format is wrong.\n"
@@ -167,14 +166,16 @@ public class Parser {
             String start = parts[1].trim();
             String end = parts[2].trim();
 
-            if(taskDescription.isEmpty() || start.isEmpty() || end.isEmpty()){
+            if(taskDescription.isEmpty() || start.isEmpty() || end.isEmpty()) {
                 ui.showError("Bob.Task description or start or end time should not be empty.");
             }
             else{
                 try {
+                    /* Convert start string to localdate object and validates format */
                     LocalDate.parse(start);
+                    /* Convert end string to localdate object and validates format */
                     LocalDate.parse(end);
-
+                    /* If both dates are valid then create a new event task */
                     Task task = new Event(taskDescription, start, end);
                     tasks.addTask(task);
                     storage.save(tasks.getTasks());
@@ -193,13 +194,11 @@ public class Parser {
      * @param ui the user interface
      * @param storage the storage manager
      */
-    private static void handleDelete(String input, TaskList tasks, Ui ui, Storage storage){
+    private static void handleDelete(String input, TaskList tasks, Ui ui, Storage storage) {
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
-            /**
-             * Check if tasknumber out of range
-             */
-            if (taskNumber < 0 || taskNumber >= tasks.size()){
+            /* Check if tasknumber out of range */
+            if (taskNumber < 0 || taskNumber >= tasks.size()) {
                 ui.showError("Bob.Task number is out of range please try again.");
             }
             else {
@@ -207,7 +206,7 @@ public class Parser {
                 storage.save(tasks.getTasks());
                 ui.showTaskDeleted(deletedTask, tasks.size());
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             ui.showError("Please enter a valid task number.");
         }
     }

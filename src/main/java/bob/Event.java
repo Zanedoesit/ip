@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +38,7 @@ public class Event extends Task {
     /** Get the start date
      * @return start date in LocalDate
      */
-    public LocalDate getStart(){
+    public LocalDate getStart() {
         return start;
     }
 
@@ -46,7 +46,7 @@ public class Event extends Task {
      * Get the end date
      * @return end date in LocalDate
      */
-    public LocalDate getEnd(){
+    public LocalDate getEnd() {
         return end;
     }
 

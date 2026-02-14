@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Ui {
     /**
      *  Constructor class
      */
-    public Ui(){
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -51,7 +51,7 @@ public class Ui {
      * Displays message to the user
      * @param message the message to display
      */
-    public void showMessage (String message){
+    public void showMessage (String message) {
         System.out.println("------------------------------------\n"
                 + message + "\n"
                 + "------------------------------------\n");
@@ -61,7 +61,7 @@ public class Ui {
      * Displays error message to the user with the specific error
      * @param error the error message to display
      */
-    public void showError (String error){
+    public void showError (String error) {
         System.out.println("------------------------------------\n"
                 + "Error" + error + "\n"
                 + "------------------------------------\n");
@@ -71,9 +71,9 @@ public class Ui {
      * Display all tasks in the task list
      * @param tasks the ArrayList of tasks to display
      */
-    public void showTaskList (ArrayList<Task> tasks){
+    public void showTaskList (ArrayList<Task> tasks) {
         System.out.println("------------------------------------\n");
-        for (int i = 0; i <tasks.size(); i++){
+        for (int i = 0; i <tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
         System.out.println("------------------------------------\n");
@@ -84,7 +84,7 @@ public class Ui {
      * @param task the task added
      * @param taskCount the total number of tasks in the list
      */
-    public void showTaskAdded (Task task, int taskCount){
+    public void showTaskAdded (Task task, int taskCount) {
         System.out.println("------------------------------------\n"
                 + "Got it. I've added this task: \n"
                 + task + "\n"
@@ -97,7 +97,7 @@ public class Ui {
      * @param task the task deleted
      * @param taskCount the total number of tasks in the list
      */
-    public void showTaskDeleted (Task task, int taskCount){
+    public void showTaskDeleted (Task task, int taskCount) {
         System.out.println("------------------------------------\n"
                 + "Alright. I've removed this task: \n"
                 + task + "\n"
@@ -120,7 +120,7 @@ public class Ui {
      * Display a confirmation message for task unmarked
      * @param task the task marked as not done
      */
-    public void showTaskUnmarked(Task task){
+    public void showTaskUnmarked(Task task) {
         System.out.println("------------------------------------\n"
                 + "Ok, I've marked this task as not done yet:\n"
                 + task + "\n"

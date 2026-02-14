@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,9 @@ public class TaskList {
 
     /**
      * Handles adding of task
-     * @param task the Task object to be added
+     * @param task the Task object to be added to the list
      */
-    public void addTask (Task task){
+    public void addTask (Task task) {
         tasks.add(task);
     }
 
@@ -61,7 +61,7 @@ public class TaskList {
      * Handle mark task command
      * @param index the index of the task to mark as done
      */
-    public void markTask(int index){
+    public void markTask(int index) {
         tasks.get(index).markAsDone();
     }
 
@@ -69,7 +69,7 @@ public class TaskList {
      * Handle unmark task command
      * @param index the index of the task to mark as not done yet
      */
-    public void unmarkTask(int index){
+    public void unmarkTask(int index) {
         tasks.get(index).markAsNotDone();
     }
 
