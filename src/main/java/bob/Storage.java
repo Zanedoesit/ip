@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 /**
  * Bob storage class code that handles saving and loading tasks
@@ -148,4 +149,43 @@ public class Storage {
             return LocalDate.parse(dateString);
         }
     }
-}
+
+    /**
+     * Return motivational quote from cheer file
+     * Creates the data folder if missing
+     * @return a random quote string
+     */
+    public String getRandomCheerQuote() {
+        try {
+            File folder = new File("data");
+            if (folder.exists() == false) {
+                folder.mkdir();
+            }
+
+            File file = new File("data/cheer.txt");
+            if (file.exists() == false) {
+                file.createNewFile();
+            }
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            ArrayList<String> quotes = new ArrayList<>();
+            /* Read file line by line until it is null */
+            while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty() == false) {
+                    quotes.add(line.trim());
+                }
+            }
+            reader.close();
+
+            if (quotes.isEmpty()) {
+                return "No quotes found. Add them in data/cheer.txt";
+            }
+            /* Choose random quote from the list */
+            Random random = new Random();
+            return quotes.get(random.nextInt(quotes.size()));
+
+        } catch (IOException e) {
+            return "Unable to read cheer quotes.";
+        }
+        }
+    }

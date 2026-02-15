@@ -43,6 +43,9 @@ public class Parser {
         } else if (input.toLowerCase().startsWith("find ")) {
             handleFind(input, tasks, ui);
 
+        } else if (input.trim().equalsIgnoreCase("cheer")) {
+            handleCheer(ui, storage);
+
         } else {
             Task task = new Task(input);
             tasks.addTask(task);
@@ -234,6 +237,16 @@ public class Parser {
         } else {
             ui.showFindResults(matches);
         }
+    }
+
+    /**
+     * Handle cheer comand
+     * @param ui the user interface
+     * @param storage the storage manager
+     */
+    private static void handleCheer(Ui ui, Storage storage) {
+        String quote = storage.getRandomCheerQuote();
+        ui.showCheer(quote);
     }
 }
 
