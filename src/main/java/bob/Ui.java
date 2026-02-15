@@ -138,4 +138,14 @@ public class Ui {
         }
     }
 
+    /**
+     * Display cheer quote
+     * @param quote the quote to display
+     */
+    public void showCheer(String quote) {
+        System.out.println("------------------------------------\n"
+                + quote + "\n"
+                + "------------------------------------\n");
+    }
+
 }
