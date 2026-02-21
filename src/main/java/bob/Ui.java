@@ -4,17 +4,40 @@ import java.util.Scanner;
 import java.util.ArrayList;
 /**
  * Ui class to handle interaction with user
+ * For CLI, messages printed directly to console
+ * For GUI, messages are captured internally and returned
+ * as strings
+ *
  */
 public class Ui {
     private Scanner scanner;
+    private final boolean isCapture;
+    private final StringBuilder out;
 
     /**
-     *  Constructor class
+     * CLI Ui
      */
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        this(false);
     }
 
+    /**
+     * Create Ui instance
+     *
+     * @param isCapture true means GUI
+     *                  false means CLI
+     */
+    public Ui(boolean isCapture) {
+        this.isCapture = isCapture;
+
+        if (isCapture) {
+            this.out = new StringBuilder();
+            this.scanner = null;
+        } else {
+            this.out = null;
+            this.scanner = new Scanner(System.in);
+        }
+    }
     /**
      *  Welcome message with BOB logo when the program starts
      */
@@ -24,7 +47,7 @@ public class Ui {
                 + "|  _ \\| | |   _ \\\n"
                 + "| |_) | |_|  |_) |\n"
                 + "|____/ \\___/ |____/\n";
-        System.out.println("Hello from\n" + logo +
+        append("Hello from\n" + logo +
                 "------------------------------------\n"
                 + "Hi! I'm BOB\n"
                 + "What can I do for you today?\n\n");
@@ -34,7 +57,7 @@ public class Ui {
      * Display goodbye message after user exits
      */
     public void showGoodbye() {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + "Bye. See you soon!\n\n"
                 + "\n------------------------------------");
     }
@@ -52,7 +75,7 @@ public class Ui {
      * @param message the message to display
      */
     public void showMessage (String message) {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + message + "\n"
                 + "------------------------------------\n");
     }
@@ -62,7 +85,7 @@ public class Ui {
      * @param error the error message to display
      */
     public void showError (String error) {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + "Error" + error + "\n"
                 + "------------------------------------\n");
     }
@@ -72,11 +95,11 @@ public class Ui {
      * @param tasks the ArrayList of tasks to display
      */
     public void showTaskList (ArrayList<Task> tasks) {
-        System.out.println("------------------------------------\n");
+        append("------------------------------------\n");
         for (int i = 0; i <tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            append((i + 1) + ". " + tasks.get(i));
         }
-        System.out.println("------------------------------------\n");
+        append("------------------------------------\n");
     }
 
     /**
@@ -85,10 +108,10 @@ public class Ui {
      * @param taskCount the total number of tasks in the list
      */
     public void showTaskAdded (Task task, int taskCount) {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + "Got it. I've added this task: \n"
                 + task + "\n"
-                + "Now you have " + taskCount + " tasks in the lis.\n"
+                + "Now you have " + taskCount + " tasks in the list.\n"
                 + "------------------------------------\n");
     }
 
@@ -98,10 +121,10 @@ public class Ui {
      * @param taskCount the total number of tasks in the list
      */
     public void showTaskDeleted (Task task, int taskCount) {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + "Alright. I've removed this task: \n"
                 + task + "\n"
-                + "Now you have " + taskCount + " tasks in the lis.\n"
+                + "Now you have " + taskCount + " tasks in the list.\n"
                 + "------------------------------------\n");
     }
 
@@ -110,7 +133,7 @@ public class Ui {
      * @param task the task marked as done
      */
     public void showTaskMarked(Task task) {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + "Nice! I've marked this task as done:\n"
                 + task + "\n"
                 + "------------------------------------\n");
@@ -121,7 +144,7 @@ public class Ui {
      * @param task the task marked as not done
      */
     public void showTaskUnmarked(Task task) {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + "Ok, I've marked this task as not done yet:\n"
                 + task + "\n"
                 + "------------------------------------\n");
@@ -132,7 +155,7 @@ public class Ui {
      * @param matches the list of matching tasks
      */
     public void showFindResults(ArrayList<Task> matches) {
-        System.out.println("Here are the matching tasks in your list:");
+        append("Here are the matching tasks in your list:");
         for (int i = 0; i < matches.size(); i ++){
             System.out.println((i + 1) + "." + matches.get(i));
         }
@@ -143,9 +166,38 @@ public class Ui {
      * @param quote the quote to display
      */
     public void showCheer(String quote) {
-        System.out.println("------------------------------------\n"
+        append("------------------------------------\n"
                 + quote + "\n"
                 + "------------------------------------\n");
     }
+
+    /**
+     * Append helper method
+     * @param s the string to be appended
+     */
+    private void append(String s) {
+        if (isCapture) {
+            out.append(s).append(System.lineSeparator());
+        }
+        else {
+            System.out.println(s);
+        }
+    }
+
+    /**
+     * Returns captured output for GUI
+     *
+     * @return accumulated output string
+     */
+    public String getOutputAndClear() {
+        if (!isCapture){
+            return "";
+        }
+        String result = out.toString();
+        out.setLength(0);
+        return result;
+    }
+
+
 
 }
