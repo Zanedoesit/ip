@@ -13,6 +13,7 @@ public class Ui {
     private Scanner scanner;
     private final boolean isCapture;
     private final StringBuilder out;
+    private static final String lineDivider = "------------------------------------";
 
     /**
      * CLI Ui
@@ -41,14 +42,14 @@ public class Ui {
     /**
      *  Welcome message with BOB logo when the program starts
      */
-    public void showWelcome(){
+    public void showWelcome() {
         String logo = " ____   ___   ____\n"
                 + "|  ) / _ \\ |  )\n"
                 + "|  _ \\| | |   _ \\\n"
                 + "| |_) | |_|  |_) |\n"
                 + "|____/ \\___/ |____/\n";
         append("Hello from\n" + logo +
-                "------------------------------------\n"
+                lineDivider + "\n"
                 + "Hi! I'm BOB\n"
                 + "What can I do for you today?\n\n");
     }
@@ -57,9 +58,9 @@ public class Ui {
      * Display goodbye message after user exits
      */
     public void showGoodbye() {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + "Bye. See you soon!\n\n"
-                + "\n------------------------------------");
+                + lineDivider + "\n" );
     }
 
     /**
@@ -75,9 +76,9 @@ public class Ui {
      * @param message the message to display
      */
     public void showMessage (String message) {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + message + "\n"
-                + "------------------------------------\n");
+                + lineDivider + "\n" );
     }
 
     /**
@@ -85,9 +86,9 @@ public class Ui {
      * @param error the error message to display
      */
     public void showError (String error) {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + "Error" + error + "\n"
-                + "------------------------------------\n");
+                + lineDivider + "\n" );
     }
 
     /**
@@ -95,11 +96,11 @@ public class Ui {
      * @param tasks the ArrayList of tasks to display
      */
     public void showTaskList (ArrayList<Task> tasks) {
-        append("------------------------------------\n");
+        append(lineDivider);
         for (int i = 0; i <tasks.size(); i++) {
             append((i + 1) + ". " + tasks.get(i));
         }
-        append("------------------------------------\n");
+        append(lineDivider);
     }
 
     /**
@@ -108,11 +109,11 @@ public class Ui {
      * @param taskCount the total number of tasks in the list
      */
     public void showTaskAdded (Task task, int taskCount) {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + "Got it. I've added this task: \n"
                 + task + "\n"
                 + "Now you have " + taskCount + " tasks in the list.\n"
-                + "------------------------------------\n");
+                + lineDivider + "\n" );
     }
 
     /**
@@ -121,11 +122,11 @@ public class Ui {
      * @param taskCount the total number of tasks in the list
      */
     public void showTaskDeleted (Task task, int taskCount) {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + "Alright. I've removed this task: \n"
                 + task + "\n"
                 + "Now you have " + taskCount + " tasks in the list.\n"
-                + "------------------------------------\n");
+                + lineDivider + "\n" );
     }
 
     /**
@@ -133,10 +134,10 @@ public class Ui {
      * @param task the task marked as done
      */
     public void showTaskMarked(Task task) {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + "Nice! I've marked this task as done:\n"
                 + task + "\n"
-                + "------------------------------------\n");
+                + lineDivider + "\n" );
     }
 
     /**
@@ -144,10 +145,10 @@ public class Ui {
      * @param task the task marked as not done
      */
     public void showTaskUnmarked(Task task) {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + "Ok, I've marked this task as not done yet:\n"
                 + task + "\n"
-                + "------------------------------------\n");
+                + lineDivider + "\n");
     }
 
     /**
@@ -157,7 +158,7 @@ public class Ui {
     public void showFindResults(ArrayList<Task> matches) {
         append("Here are the matching tasks in your list:");
         for (int i = 0; i < matches.size(); i ++){
-            System.out.println((i + 1) + "." + matches.get(i));
+            append((i + 1) + "." + matches.get(i));
         }
     }
 
@@ -166,9 +167,9 @@ public class Ui {
      * @param quote the quote to display
      */
     public void showCheer(String quote) {
-        append("------------------------------------\n"
+        append(lineDivider + "\n"
                 + quote + "\n"
-                + "------------------------------------\n");
+                + lineDivider + "\n");
     }
 
     /**

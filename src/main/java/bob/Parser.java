@@ -19,31 +19,33 @@ public class Parser {
      * @param storage the storage manager for saving tasks
      */
     public static void parse(String input, TaskList tasks, Ui ui, Storage storage) {
-        if (input.toLowerCase().equals("list")){
+        String lowerInput = input.toLowerCase();
+
+        if (lowerInput.equals("list")){
             ui.showTaskList(tasks.getTasks());
 
-        } else if (input.toLowerCase().startsWith("mark ")) {
+        } else if (lowerInput.startsWith("mark ")) {
             handleMark(input, tasks, ui, storage);
 
-        } else if (input.toLowerCase().startsWith("unmark ")) {
+        } else if (lowerInput.startsWith("unmark ")) {
             handleUnmark(input, tasks, ui, storage);
 
-        } else if (input.toLowerCase().startsWith("todo ")) {
+        } else if (lowerInput.startsWith("todo ")) {
             handleTodo(input, tasks, ui, storage);
 
-        } else if (input.toLowerCase().startsWith("deadline ")) {
+        } else if (lowerInput.startsWith("deadline ")) {
             handleDeadline(input, tasks, ui, storage);
 
-        } else if (input.toLowerCase().startsWith("event ")) {
+        } else if (lowerInput.startsWith("event ")) {
             handleEvent(input, tasks, ui, storage);
 
-        } else if (input.toLowerCase().startsWith("delete ")) {
+        } else if (lowerInput.startsWith("delete ")) {
             handleDelete(input, tasks, ui, storage);
 
-        } else if (input.toLowerCase().startsWith("find ")) {
+        } else if (lowerInput.startsWith("find ")) {
             handleFind(input, tasks, ui);
 
-        } else if (input.trim().equalsIgnoreCase("cheer")) {
+        } else if (lowerInput.startsWith("cheer")) {
             handleCheer(ui, storage);
 
         } else {
@@ -135,14 +137,14 @@ public class Parser {
         } else {
             String taskDescription = parts[0].trim();
             String dateString = parts[1].trim();
-            /* Check for empty task or date */
+            // Check for empty task or date
             if (taskDescription.isEmpty() || dateString.isEmpty()) {
                 ui.showError("Bob.Task description or deadline is empty. Please fill it up.");
             } else {
                 try {
-                    /* Convert date string to localdate object and validates format */
+                    // Convert date string to localdate object and validates format
                     LocalDate.parse(dateString);
-                    /* If valid then create a new deadline task */
+                    // If valid then create a new deadline task
                     Task task = new Deadline(taskDescription, dateString);
                     tasks.addTask(task);
                     storage.save(tasks.getTasks());
@@ -178,11 +180,11 @@ public class Parser {
             }
             else{
                 try {
-                    /* Convert start string to localdate object and validates format */
+                    // Convert start string to localdate object and validates format
                     LocalDate.parse(start);
-                    /* Convert end string to localdate object and validates format */
+                    // Convert end string to localdate object and validates format
                     LocalDate.parse(end);
-                    /* If both dates are valid then create a new event task */
+                    // If both dates are valid then create a new event task
                     Task task = new Event(taskDescription, start, end);
                     tasks.addTask(task);
                     storage.save(tasks.getTasks());
@@ -204,7 +206,7 @@ public class Parser {
     private static void handleDelete(String input, TaskList tasks, Ui ui, Storage storage) {
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
-            /* Check if tasknumber out of range */
+            // Check if tasknumber out of range
             if (taskNumber < 0 || taskNumber >= tasks.size()) {
                 ui.showError("Bob.Task number is out of range please try again.");
             }
@@ -230,7 +232,7 @@ public class Parser {
         if (keyword.isEmpty()) {
             ui.showError("Please provide a keyword.");
         }
-        /* Use findtask helper method to check for matching keywords */
+        // Use findtask helper method to check for matching keywords
         ArrayList<Task> matches = tasks.findTasks(keyword);
         if (matches.isEmpty()) {
             ui.showMessage("No matching tasks found.");
