@@ -29,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        /* add format date */
+        // add format date
         String formattedStart = start.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         String formattedEnd = end.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return "[E]" + getStatusIcon() + " " + description + " (from: " + formattedStart + " to: " + formattedEnd + ")";

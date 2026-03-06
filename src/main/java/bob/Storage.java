@@ -27,7 +27,7 @@ public class Storage {
     public void load(ArrayList<Task> tasks){
         try {
             assert tasks != null;
-
+            // Handle case where data folder and file doesn't exist
             File folder = new File("data");
             if (folder.exists() == false) {
                 folder.mkdir();
@@ -37,7 +37,7 @@ public class Storage {
                 file.createNewFile();
                 return;
             }
-            /* Read the file using BufferedReader and handle each case with helper methods */
+            // Read the file using BufferedReader and handle each case with helper methods
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -61,7 +61,7 @@ public class Storage {
      * @param line the whole line of text input
      */
     private void loadToDo(ArrayList<Task> tasks, String line) {
-        /* Check if task is done */
+        // Check if task is done
         boolean isDone = line.contains("[X]");
         String description = line.substring(6);
 
@@ -83,7 +83,7 @@ public class Storage {
         String description = line.substring(6, byIndex);
         String dateString = line.substring(byIndex + 6, line.length() - 1);
 
-        /* Convert display format back to yyyy-mm-dd using helper method */
+        // Convert display format back to yyyy-mm-dd using helper method
         LocalDate date = convertToLocalDate(dateString);
 
         Task task = new Deadline(description, date.toString());
@@ -106,7 +106,7 @@ public class Storage {
         String startString = line.substring(fromIndex + 8, toIndex);
         String endString = line.substring(toIndex + 5, line.length() - 1);
 
-        /* Convert display format back to yyyy-mm-dd with helper method */
+        // Convert display format back to yyyy-mm-dd with helper method
         LocalDate startDate = convertToLocalDate(startString);
         LocalDate endDate = convertToLocalDate(endString);
 
@@ -125,10 +125,9 @@ public class Storage {
     public void save(ArrayList<Task> tasks) {
         try {
             assert tasks != null;
-
-            /* Create a filewriter linked to save file */
+            // Create a filewriter linked to save file
             FileWriter writer = new FileWriter(filePath);
-            /* Write each task into file line by line */
+            // Write each task into file line by line
             for (int i = 0; i < tasks.size(); i ++){
                 writer.write(tasks.get(i).toString() + "\n");
             }
@@ -161,18 +160,18 @@ public class Storage {
     public String getRandomCheerQuote() {
         try {
             File folder = new File("data");
-            if (folder.exists() == false) {
+            if (!folder.exists()) {
                 folder.mkdir();
             }
 
             File file = new File("data/cheer.txt");
-            if (file.exists() == false) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
             String line;
             BufferedReader reader = new BufferedReader(new FileReader(file));
             ArrayList<String> quotes = new ArrayList<>();
-            /* Read file line by line until it is null */
+            // Read file line by line until it is null
             while ((line = reader.readLine()) != null) {
                 if (line.trim().isEmpty() == false) {
                     quotes.add(line.trim());
@@ -183,7 +182,7 @@ public class Storage {
             if (quotes.isEmpty()) {
                 return "No quotes found. Add them in data/cheer.txt";
             }
-            /* Choose random quote from the list */
+            // Choose random quote from the list
             Random random = new Random();
             return quotes.get(random.nextInt(quotes.size()));
 
