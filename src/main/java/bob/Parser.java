@@ -52,6 +52,10 @@ public class Parser {
         } else if (input.trim().equalsIgnoreCase("cheer")) {
             handleCheer(ui, storage);
 
+        }
+        else if (lowerInput.equals("help")) {
+            handleHelp(ui);
+
         } else {
             Task task = new Task(input);
             tasks.addTask(task);
@@ -246,7 +250,7 @@ public class Parser {
     }
 
     /**
-     * Handle cheer comand
+     * Handle cheer command
      * @param ui the user interface
      * @param storage the storage manager
      */
@@ -254,5 +258,36 @@ public class Parser {
         String quote = storage.getRandomCheerQuote();
         ui.showCheer(quote);
     }
-}
 
+
+    /**
+     * Handle help command
+     * Gives list of all possible commands
+     * @param ui the user interface
+     */
+    private static void handleHelp(Ui ui) {
+        ui.showMessage(
+                "Here are the commands you can use:\n"
+                + "1. list\n"
+                + " Shows all tasks. \n\n"
+                + "2. todo <description> \n"
+                + " Adds a todo task. \n\n"
+                + "3. deadline <description> /by <yyyy-mm-dd> \n"
+                + " Adds a deadline task. \n\n"
+                + "4. event <description> /from <yyyy-mm-dd> / to <yyyy-mm-dd> \n"
+                + " Adds an event task. \n\n"
+                + "5. mark <task number> \n"
+                + " Marks a task as done. \n\n"
+                + "6. unmark <task number> \n"
+                + " Marks a task as not done. \n\n"
+                + "7. delete <task number> \n"
+                + " Deletes a task. \n\n"
+                + "8. find <keyword> \n"
+                + " Finds tasks matching the keyword. \n\n"
+                + "9. cheer\n"
+                + " Shows a motivational quote. \n\n"
+                + "10. bye\n"
+                + " Exits Bob."
+        );
+    }
+}

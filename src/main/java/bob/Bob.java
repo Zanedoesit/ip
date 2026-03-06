@@ -87,7 +87,7 @@ public class Bob {
      * Welcome message for GUI
      * @return chatbot welcome message
      */
-    public String getWelcomeMessage() {
+    public String getWelcomeMessage () {
         return "Hi! I'm BOB\nWhat can I do for you today?";
     }
 
@@ -97,7 +97,7 @@ public class Bob {
      * @return true if chatbot should exit
      * and false otherwise
      */
-    public boolean isExit() {
+    public boolean isExit () {
         return isExit;
     }
 
@@ -105,7 +105,7 @@ public class Bob {
      *  bob.Main method that runs the chatbot
      * @param args command line argument
      */
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         new Bob("./data/bob.txt").run();
     }
 
