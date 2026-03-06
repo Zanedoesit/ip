@@ -26,6 +26,7 @@ public class Storage {
 
     public void load(ArrayList<Task> tasks){
         try {
+            assert tasks != null;
             // Handle case where data folder and file doesn't exist
             File folder = new File("data");
             if (folder.exists() == false) {
@@ -123,6 +124,7 @@ public class Storage {
      */
     public void save(ArrayList<Task> tasks) {
         try {
+            assert tasks != null;
             // Create a filewriter linked to save file
             FileWriter writer = new FileWriter(filePath);
             // Write each task into file line by line

@@ -19,6 +19,10 @@ public class Parser {
      * @param storage the storage manager for saving tasks
      */
     public static void parse(String input, TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+
         String lowerInput = input.toLowerCase();
 
         if (lowerInput.equals("list")){
@@ -45,7 +49,7 @@ public class Parser {
         } else if (lowerInput.startsWith("find ")) {
             handleFind(input, tasks, ui);
 
-        } else if (lowerInput.startsWith("cheer")) {
+        } else if (input.trim().equalsIgnoreCase("cheer")) {
             handleCheer(ui, storage);
 
         } else {
