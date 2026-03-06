@@ -29,6 +29,7 @@ public class TaskList {
      * @return new task list
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < tasks.size();
         return tasks.remove(index);
     }
 

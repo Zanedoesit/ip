@@ -19,6 +19,10 @@ public class Parser {
      * @param storage the storage manager for saving tasks
      */
     public static void parse(String input, TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
+
         if (input.toLowerCase().equals("list")){
             ui.showTaskList(tasks.getTasks());
 
