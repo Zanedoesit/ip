@@ -5,8 +5,8 @@ Bob is a task management chatbot with a GUI. It helps users manage tasks such as
 
 ## Using Bob
 Bob can be used in 2 ways.
-1. **GUI **
-2. **CLI **
+1. **GUI**
+2. **CLI**
 
 ## GUI Mode
 This provides a graphical user interface
