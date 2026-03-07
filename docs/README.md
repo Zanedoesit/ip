@@ -1,30 +1,73 @@
-# bob.bob User Guide
+# Bob User Guide
 
-// Update the title above to match the actual product name
+## Introduction
+Bob is a task management chatbot with a GUI. It helps users manage tasks such as todo, deadline and event.
 
-// Product screenshot goes here
+## Using Bob
+Bob can be used in 2 ways.
+1. **GUI **
+2. **CLI **
 
-// Product intro goes here
+## GUI Mode
+This provides a graphical user interface
 
-## Adding deadlines
+### Launching the GUI
 
-// Describe the action and its outcome.
+1.Download the bob.jar file.
+2.Open a terminal.
+3.Navigate to buid/libs
+4.From the dropdown of intelliJ run bob.jar
+or
+5.Run the following command:
 
-// Give examples of usage
+````bash
+java -jar build/libs/bob.jar
+````
+## CLI Mode
+This provides a comand line user interface
 
-Example: `keyword (optional arguments)`
+### Launching the CLI
 
-// A description of the expected outcome goes here
+1.From the dropdown of intelliJ run Bob
+or
+2.From the root Run:
 
-```
-expected output
-```
+````bash
+java -cp build/classes/java/main bob.Bob
+````
 
-## Feature ABC
+## Features
 
-// Feature details
+### View tasks
+`list`
+Shows all tasks.
 
+### Add a todo
+`todo <description>`
+Example: `todo buy book`
 
-## Feature XYZ
+### Add a deadline
+`deadline <description> /by <yyyy-mm-dd>`
+Example: `deadline submit assignment  /by 2026-04-11`
 
-// Feature details
+### Add an event
+`event <description> /from <yyyy-mm-dd> /to <yyyy-mm-dd>`
+Example: `group meeting /from 2026-03-10 /to 2026-03-10`
+
+### Mark task
+`mark <task number>`
+
+### Unmark task
+`unmark <task number>`
+
+### Delete task
+`delete <task number>`
+
+### Find tasks
+`find <keyword>`
+
+### Help 
+`help`
+
+### Exit
+`bye`
