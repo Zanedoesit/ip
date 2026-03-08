@@ -87,7 +87,7 @@ public class Ui {
      */
     public void showError (String error) {
         append(lineDivider + "\n"
-                + "Error" + error + "\n"
+                + "Error: " + error + "\n"
                 + lineDivider + "\n" );
     }
 
