@@ -13,28 +13,18 @@ This provides a graphical user interface
 
 ### Launching the GUI
 
-1. Run:
-````bash
-java ./gradlew clean shadowJar
-````
-
-````bash
-java -jar build/libs/bob.jar
-````
-
-1. Download the bob.jar file.
+0. (Recommended)
+1. Download the bob.jar file. 
 2. Open a terminal.
-3. Navigate to buid/libs
-4. From the dropdown of intelliJ run bob.jar
-5. Run the following command:
+3. Run the following command:
 
 ````bash
 java -jar bob.jar
 ````
 
-6. Or if downloading from repository
+4. Or if downloading from repository
 
-7. Run:
+5. Run:
 
 ````bash
 java ./gradlew clean shadowJar
@@ -49,7 +39,7 @@ This provides a comand line user interface
 
 ### Launching the CLI
 
-1. From the dropdown of intelliJ run Bob
+1. From the dropdown of intelliJ run Bob directly
 2. Or
 3. From the root Run:
 
